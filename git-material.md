@@ -55,6 +55,16 @@ git reflog：查看历史命令
 
 ## 月光宝盒
 
+通过两个命令：
+
+git log
+
+git log --oneline
+
+git reset  --hard commit id
+
+
+
 背景：每次提交都修改了多个文件。每次提交都会有一个版本号。 
 
 目标：回到某一个版本号，还原多个文件。
@@ -98,21 +108,28 @@ git reflog：查看历史命令
 
 ## 撤销修改
 
-没有提交到暂存区(没有 add) :  ctrl + z
+1. 放弃工作区的修改
 
-本地修改了 --> 运行了 git add:
+   背景：没有运行add
 
-`git checkout -- yourfilename.txt`
+   命令: git checkout -- yourfilename.ext
 
-本地修改了 --> 运行了 git add
+2. 放弃暂存区的修改
+
+   背景：运行了add,没有commit
+
+   命令：git reset HEAD yourfilename.ext  gitcheckout -- yourfilename.ext
+
+3. 通过版本管理，放弃某个版本的修改
+
+4. 删除文件。你已经在硬盘上手动删除了文件。
+
+   - 这个文件没有被跟踪过。
+   - 文件在仓库中
+     - 从分支中还原：git checkout -- yourfilename.ext
+     - 你在分支中也删除: git rm yourfilename.ext git commit -m ""; 
 
 
-
-还原
-
-场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令`git checkout -- file`。
-
-场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令`git reset HEAD <file>`，就回到了场景1，第二步按场景1操作。
 
 
 
