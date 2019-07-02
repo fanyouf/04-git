@@ -1,4 +1,4 @@
 web标准
 - html
-- css
+- css：less
 - javascript
