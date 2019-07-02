@@ -100,6 +100,12 @@ git reflog：查看历史命令
 
 没有提交到暂存区(没有 add) :  ctrl + z
 
+本地修改了 --> 运行了 git add:
+
+`git checkout -- yourfilename.txt`
+
+本地修改了 --> 运行了 git add
+
 
 
 还原
