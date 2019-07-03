@@ -51,19 +51,37 @@
 
 `git commit`
 
+格式：`git commit -m "内容"`
+
 
 
 你也可以git commit -a -m "提交说明" 来代替上面两句代码了。
 
 
 
+### 关于commit内容的说明
 
+有一个清晰合理的commit格式是非常有必要的。下面是一个工具：
 
+```
+npm install -g commitizen
+```
 
+```javascript
+commitizen init cz-conventional-changelog --save-dev --save-exact
+```
 
 
 
 ## 月光宝盒-版本管理
+
+
+
+### 理解commit
+
+![1562118695153](git-material.assets/1562118695153.png)
+
+
 
 通过两个命令：
 
@@ -74,6 +92,8 @@ git log --oneline
 git reset  --hard commit id
 
 git reflog：查看历史命令
+
+### 实操
 
 背景：每次提交都修改了多个文件。每次提交都会有一个版本号。 
 
@@ -121,8 +141,6 @@ git reflog：查看历史命令
 ### 图示
 
 
-
-初始状态  -----> 
 
 
 
@@ -209,6 +227,24 @@ git push -u origin master
 - 所有的修改操作都应该在git目录下进行。
 - git add . 有空格
 - git pull  是从远程拉取最新的代码。（可能在你在本地修改代码时，有另外的同事也在修改代码，所以在提交之间一定要先拉取最新的代码）
+
+
+
+分支
+
+- 查看分支：git branch
+
+命令会列出所有分支，当前分支前面会标一个`*`号
+
+- 创建分支: git branch 分支名
+- 删除分支：git branch -d dev
+
+- 切换分支: git checkout 分支名
+
+- 创建并切换分支：git checkout -b 分支名
+- 合并分支：git merge 分支名
+  - 如果你现在是在a分支，git merge b ，就把b分支中的内容合并到a分支中。
+- 
 
 
 
