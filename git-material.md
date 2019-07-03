@@ -26,6 +26,8 @@
 
 ## 登记
 
+在使用git之前，你可能需要进行登记。这个也比较好理解：你与其它小伙伴一起工作，你贡献了你的代码，你总是需要去签名的吧。
+
 - git config --global user.email "you@example.com"
 - git config --global user.name "yourname"
 
@@ -35,25 +37,33 @@
 
 
 
-### 修改
+### 跟踪修改
 
-包括新建文件，修改文件内容等操作均属性于修改的范畴。
+包括新建文件，修改文件内容等操作均属性于修改的范畴。我们要把工作区中的修改添加到git的仓库中去。使用命令：git add 
 
-`git add` 
+- 添加指定文件，多个文件使用空格隔开。 `git add yourfilename1.txt yourfilename2.txx `
+
+- 如果修改的文件很多，可以一次添加全部的文件。`git add .`  注意add后面有一个空格，再接上.
 
 ### 提交修改
 
+你上面的修改，提交到
+
 `git commit`
 
-常用操作
 
-git status：检查当前的状态
 
-git log: 查看提交历史
+你也可以git commit -a -m "提交说明" 来代替上面两句代码了。
 
-git reflog：查看历史命令
 
-## 月光宝盒
+
+
+
+
+
+
+
+## 月光宝盒-版本管理
 
 通过两个命令：
 
@@ -63,7 +73,7 @@ git log --oneline
 
 git reset  --hard commit id
 
-
+git reflog：查看历史命令
 
 背景：每次提交都修改了多个文件。每次提交都会有一个版本号。 
 
@@ -106,6 +116,16 @@ git reset  --hard commit id
 
 你可以简单理解为：第一步把需要提交的文件修改通通放到暂存区，第二步：一次性提交暂存区的所有修改。
 
+
+
+### 图示
+
+
+
+初始状态  -----> 
+
+
+
 ## 撤销修改
 
 1. 放弃工作区的修改
@@ -130,6 +150,71 @@ git reset  --hard commit id
      - 你在分支中也删除: git rm yourfilename.ext git commit -m ""; 
 
 
+
+
+
+## github
+
+git和github的关系。git是一个版本管理工具，github提供了一个`网络版本`的代码库，它可以允许你在远程建立git库，这样你就不用担心本地电脑坏掉啦。
+
+当然 ，你得先在github上申请帐号。接下来，我们看看我们目前的处境：有一个可以建立远程库的github帐号，有一个本地使用的版本管理工具git。
+
+### 先有本地代码库，再关联到远程github
+
+如果你先在本地建立了git库，想关联到远程github。你应该这样做：
+
+1. 去github上建立一个与本地代码库同名的代码库。
+2. 使用如下命令：
+
+`git remote add origin https://github.com/fanyoufu/04-git.git`
+
+```javascript
+git push -u origin master
+```
+
+把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支`master`推送到远程。
+
+由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+### 先创建远程github，再克隆到本地
+
+基本操作流程：
+
+1. 在github上建立仓库
+
+2. 在A电脑上：通过git clone到本地。
+
+   - clone命令会创建一个文件夹
+   - clone命令只需要在第一次时使用
+
+3. 在A电脑上：正常本地编辑（修改代码，新建文件等等），提交到本地仓库。
+
+   1. git add .
+   2. git commit
+
+4. 在A电脑上：把本地仓库同步到远程github
+
+   git push
+
+5. 在B电脑上：git clone 到本地
+6. 拉取：git pull
+
+
+
+
+
+易错点：
+
+- 在通过git连接到github时，会要求输入用户名和密码，注意：你在输入密码时，并不会显示出来。
+- 所有的修改操作都应该在git目录下进行。
+- git add . 有空格
+- git pull  是从远程拉取最新的代码。（可能在你在本地修改代码时，有另外的同事也在修改代码，所以在提交之间一定要先拉取最新的代码）
+
+
+
+## 补充
+
+[git游戏](https://learngitbranching.js.org)
 
 
 
