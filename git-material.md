@@ -238,13 +238,16 @@ git push -u origin master
 
 - 创建分支: git branch 分支名
 - 删除分支：git branch -d dev
+  - 如果你在a分支下已经新加入了很多文件，删除分支这个操作并不会这些文件
 
 - 切换分支: git checkout 分支名
 
 - 创建并切换分支：git checkout -b 分支名
 - 合并分支：git merge 分支名
   - 如果你现在是在a分支，git merge b ，就把b分支中的内容合并到a分支中。
-- 
+- 恢复分支:git branch 分支名 HEAD@{}
+  - 通过git reflog来看
+  - 找到 moving from ** to **
 
 
 
