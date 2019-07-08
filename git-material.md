@@ -2,11 +2,15 @@
 
 ## git的作用
 
-## 版本管理
+Git 是一种专为处理文本文件而设计的版本控制系统。
 
-版本控制（Version control）:学习它，爱上它，享受它。顾名思义，**版本控制系统是任何能让你了解到一个文件的历史，以及它的发展过程的系统。**
+### 版本控制
 
-设计稿
+[https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6](https://git-scm.com/book/zh/v2/起步-关于版本控制)
+
+什么是“版本控制”？版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 
+
+人人都需要版本控制系统，以学生写论文为例：
 
 - 201906011初稿.doc
 - 201906013初稿-带目录.doc
@@ -18,28 +22,78 @@
 - 201906023最终版（打印店）.doc
 - 201906024最终版（加上参考文献及边距）.doc
 
-## git中的基本概念
-
-**Git 是一种专为处理文本文件而设计的版本控制系统。**
-
-注意：只对文本文件。我们的代码恰好就是文本文件。换句话说，如果你希望记录视频文件的修改过程，git是不能帮助你的。
-
-## 登记
-
-在使用git之前，你可能需要进行登记。这个也比较好理解：你与其它小伙伴一起工作，你贡献了你的代码，你总是需要去签名的吧。
-
-- git config --global user.email "you@example.com"
-- git config --global user.name "yourname"
-
-## 使用步骤
-
-### 初始化仓库(git init)
 
 
+其它行业的人，只要涉及到：
+
+- 不断更新某些个文件
+- 希望记录更新的某些过程，以便可以回到这个状态
+
+他就会需要使用版本管理软件。
+
+
+
+许多人习惯用复制整个项目目录的方式来保存不同的版本，或许还会改名加上备份时间以示区别。 这么做唯一的好处就是简单，但是特别容易犯错。 有时候会混淆所在的工作目录，一不小心会写错文件或者覆盖意想外的文件。
+
+
+
+如果这个文件可以被多个共同维护，共同修改的话，我们将会面临更大的挑战。
+
+再如果把这个问题放在程序员的工作中：我们每天都在写代码，就是在修改某些文件，修改的频率还非常高，同时还要与其它小伙伴一起工作。想想，你要如何去管理你的代码，这是一个大问题。
+
+
+
+此时，我们就需要有一个专门的版本管理工具来帮我们进行文件版本管理。
+
+### 其它竞品
+
+- git
+- svn
+
+## 下载与安装
+
+直接在官网上下载安装包。双击即可安装。
+
+验证是否安装成功：
+
+- 在控制台中：git -v
+- 鼠标右键，
+
+
+
+## Git的使用方式
+
+- git 命令
+  - cmd / powershell
+  - git bash
+- 图形化界面
+  - tortoiseGit
+  - sourceTree
+  - 开发工具中集成 ( vscode中就有集成的git工具 )
+
+## 基本使用-管理个人简历
+
+### 初始化仓库
+
+在某一个合适的文件夹（建议新建一个空的文件夹，例如：d:/learngit）下，打开git bash，运行如下命令：
+
+`git init`
+
+此时，会多出一个隐藏的文件夹.git。
 
 ### 跟踪修改
 
-包括新建文件，修改文件内容等操作均属性于修改的范畴。我们要把工作区中的修改添加到git的仓库中去。使用命令：git add 
+Git根据文件对文件的修改来进行版本管理，这里的修改包括：新建文件，修改文件内容，删除文件，重命名等操作均属性于修改的范畴。
+
+接下来，我们在d:/learngit下面新建一个文本文件: resume.txt。我们希望使用git来跟踪这个文件的变化过程。
+
+我们要把当前用户的修改添加到git的仓库中去。使用命令：`git add`
+
+
+
+
+
+​	涉及如下三种命令格式 
 
 - 添加指定文件，多个文件使用空格隔开。 `git add yourfilename1.txt yourfilename2.txx `
 
@@ -47,160 +101,193 @@
 
 ### 提交修改
 
-你上面的修改，提交到
+#### 初次提交，要登记 
+
+第一次使用commit时，会需要你提供一个“身份信息”。这容易理解：我们需要记录下来本次的修改是由谁提供的，无论是论功行赏，或者是秋后算帐都需要要一个名单嘛。
+
+![1562549382741](git-material.assets/1562549382741.png)
+
+按上面的提示，进行设置用户email和name的设置之后，就可以正常使用了。要注意的是，这里的用户名和email可以是你凭空创造的（不必要与某个网站，或者真正的邮箱去对应起来），但是，为了我们后期使用方便，建议使用一个真正的邮箱地址。
+
+`git config --global user.email "you@example.com"`
+
+`git config --global user.name "yourname"`
+
+
+
+当然 ，这个信息也是可以修改的，具体做法是：
+
+1. 删除原信息
+2. 重新设置信息。
+
+
+
+#### 提交修改
+
+你上面的修改，提交到仓库中。
 
 `git commit`
 
 格式：`git commit -m "内容"`
 
+### 小结
 
+一次init
 
-你也可以git commit -a -m "提交说明" 来代替上面两句代码了。
+一次用户登记
 
+多次add,commit
 
-
-### 关于commit内容的说明
-
-有一个清晰合理的commit格式是非常有必要的。下面是一个工具：
-
-```
-npm install -g commitizen
-```
-
-```javascript
-commitizen init cz-conventional-changelog --save-dev --save-exact
-```
+对一个文件的修改而言，每到了一个关键的节点，就可以向版本库中提交一次。
 
 
 
-## 月光宝盒-版本管理
+## 版本穿梭
 
-
-
-### 理解commit
-
-![1562118695153](git-material.assets/1562118695153.png)
-
-
-
-通过两个命令：
+需要使用的命令如下：
 
 git log
 
 git log --oneline
 
-git reset  --hard commit id
-
 git reflog：查看历史命令
 
-### 实操
+git reset  --hard commitId
+
+
+
+### git reset
 
 背景：每次提交都修改了多个文件。每次提交都会有一个版本号。 
 
 目标：回到某一个版本号，还原多个文件。
 
-命令： `git reset --hard 'commitID'`
+命令： `git reset --hard commitID`
 
 
 
-背景：每次提交都修改了多个文件。每次提交都会有一个版本号。 
-
-目标：对某一个文件，希望回到某一个版本号，还原这个文件。
-
-命令：要用到如下三条命令
-
-	-  git reset 'commitID' yourfilename.txt
-	-  git commit -m ""
-	-  git checkout yourfilename.txt
+小细节：复制commitID
 
 
 
-## 工作区和暂存区
+## 深入git原理
 
+当你通过git init 命令去初始化Git项目之后，你会得到三个工作区域。
 
+### 三个工作区域
 
-隐藏目录`.git`是Git的版本库。Git的版本库里存了很多东西，其中最重要的是：
+- 工作目录
 
-- 暂存区： 称为stage（或者叫index）
-- 分支区：在初始化时，git会为我们自动创建的第一个分支`master`，以及指向`master`的一个指针叫`HEAD`。
+  工作目录是对Git项目的某个版本独立提取出来的内容。 这些从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供你使用或修改。它表现成正常的，普通的，我们日常编辑的文件。
 
-![git-repo](https://www.liaoxuefeng.com/files/attachments/919020037470528/0)
+- 暂存区（stage）
 
-回顾我们把文件往Git版本库里添加的时候，是分两步执行的：
+  暂存区是一个文件，保存了下次将提交的文件列表信息。
 
-第一步：是用`git add`把文件添加进去，实际上就是把本地文件修改添加到暂存区；
+- Git 仓库
 
-第二步：是用`git commit`提交更改，实际上就是把暂存区的所有内容提交到当前分支。因为我们创建Git版本库时，Git自动为我们创建了唯一一个`master`分支，所以，现在，`git commit`就是往`master`分支上提交更改。
+  记录我们所有的操作记录，它具体会以分支的模式呈现出来。
 
+### 文件的四种状态
 
+你工作目录下的每一个文件都不外乎这两种状态：已跟踪或未跟踪。 已跟踪的文件是指那些被纳入了版本控制的文件，在上一次快照中有它们的记录，在工作一段时间后，它们的状态可能处于未修改，已修改或已放入暂存区。 工作目录中除已跟踪文件以外的所有其它文件都属于未跟踪文件，它们既不存在于上次快照的记录中，也没有放入暂存区。 初次克隆某个仓库的时候，工作目录中的所有文件都属于已跟踪文件，并处于未修改状态。
 
-你可以简单理解为：第一步把需要提交的文件修改通通放到暂存区，第二步：一次性提交暂存区的所有修改。
+- 未跟踪（untracked）
 
+  没有纳入版本控制的文件。你可以通过 git add 把他们加入Git的监控中。
 
+- 已跟踪
 
-### 图示
+  指那些被纳入了版本控制的文件
 
+  - 已修改（modified）
 
+    表示修改了文件，但还没保存到 Git 仓库中。 对于已经被跟踪的文件，作了修改但还没有放到暂存区域，就是已修改状态。（要与普通文件的操作区分开：你在编辑器中编辑文件时，文件处于正在编辑，如果按下ctrl+s表示已经保存）
 
+  - 已暂存（staged）。
 
+    表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的信息中。如果作了修改并已放入暂存区域，就属于已暂存状态。 
 
-## 撤销修改
+  - 已提交（committed）
+
+    表示数据已经安全的保存在本地Git仓库中。或者是Git 目录中保存着特定版本的文件。
+
+### 基本的 Git 工作流程
+
+1. 在工作目录中修改文件。
+2. 暂存文件，将文件的快照放入暂存区域。
+3. 提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。
+
+## 撤销修改-后悔药
+
+Git的工作原理是跟踪文件的修改，我们所做的一切操作：新增，删除，修改，重命名等等都是修改。
+
+在开发过程中，我们经常需要"后悔"。
 
 1. 放弃工作区的修改
 
-   背景：没有运行add
+   文件处于已修改状态，并没有提交到暂存区（即没有运行add）。当然，如果你只是少量的修改代码的话，直接在编辑器中ctrl+z就可以了。但是，如果你修改了很多文件，或者一个文件的修改已经不能通过ctrl+z来还原了，此时，你就可以使用命令：
 
    命令: git checkout -- yourfilename.ext
 
+   ![1562320441427](git-material.assets/1562320441427.png)
+
 2. 放弃暂存区的修改
 
-   背景：运行了add,没有commit
+   文件处于已暂存状态。即你已经运行了add,但没有commit
 
-   命令：git reset HEAD yourfilename.ext  gitcheckout -- yourfilename.ext
+   ![1562320589848](git-material.assets/1562320589848.png)
 
-3. 通过版本管理，放弃某个版本的修改
+   命令：git reset HEAD yourfilename.ext  git checkout -- yourfilename.ext
 
-4. 删除文件。你已经在硬盘上手动删除了文件。
+3. 从仓库恢复
 
-   - 这个文件没有被跟踪过。
-   - 文件在仓库中
-     - 从分支中还原：git checkout -- yourfilename.ext
-     - 你在分支中也删除: git rm yourfilename.ext git commit -m ""; 
+   你已经commit了本次修改，代码也交到了仓库中。此时你有两种选择： 
 
+   - 回滚整体版本
+   - 恢复这一个文件
 
+    ```
+   git checkout commitID yourfilename
+    ```
 
-
+   
 
 ## github
 
 git和github的关系。git是一个版本管理工具，github提供了一个`网络版本`的代码库，它可以允许你在远程建立git库，这样你就不用担心本地电脑坏掉啦。
 
-当然 ，你得先在github上申请帐号。接下来，我们看看我们目前的处境：有一个可以建立远程库的github帐号，有一个本地使用的版本管理工具git。
+当然 ，你得先在github上申请帐号。接下来，我们看看我们目前的处境：有一个可以建立远程库的github帐号，有一个本地使用的版本管理工具git。下面我们就来介绍一下如何把它们关联起来。
 
-### 先有本地代码库，再关联到远程github
 
-如果你先在本地建立了git库，想关联到远程github。你应该这样做：
 
-1. 去github上建立一个与本地代码库同名的代码库。
-2. 使用如下命令：
+### 基本操作
 
-`git remote add origin https://github.com/fanyoufu/04-git.git`
+先创建远程仓库，再克隆到本地
 
-```javascript
-git push -u origin master
-```
+1. 登陆github，创建仓库
+2. 在电脑的某个文件夹下，通过git clone到本地。
+   - git clone命令会创建一个文件夹
+   - git clone命令只需要在第一次时使用
+3. 本地正常编辑（修改代码，新建文件等等），提交到本地仓库。
+   1. git add .
+   2. git commit
 
-把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支`master`推送到远程。
+4. 推送到远程github
 
-由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
-### 先创建远程github，再克隆到本地
+
+![1562552526725](git-material.assets/1562552526725.png)
+
+
+
+### 多人协作
 
 基本操作流程：
 
 1. 在github上建立仓库
 
-2. 在A电脑上：通过git clone到本地。
+2. 在A电脑上：使用https协议，通过git clone到本地。
 
    - clone命令会创建一个文件夹
    - clone命令只需要在第一次时使用
@@ -215,9 +302,8 @@ git push -u origin master
    git push
 
 5. 在B电脑上：git clone 到本地
+
 6. 拉取：git pull
-
-
 
 
 
@@ -230,24 +316,113 @@ git push -u origin master
 
 
 
-## 分支
 
-- 查看分支：git branch
+## 分支
+=======
+github的补充操作
+
+1. 删除仓库
+2. 直接进行代码编辑
+
+
+
+## 分支branch
+
+### 分支的原理 
+
+
+
+分支就是科幻电影里面的平行宇宙，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。
+
+分支在实际中有什么用呢？假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50%的代码，如果立刻提交，由于代码还没写完，不完整的代码库会导致别人不能干活了。如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。
+
+现在有了分支，就不用怕了。你创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作，而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，又不影响别人工作。
+
+但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1个文件还是1万个文件。
+
+### 分支相关命令
+
+查看分支
+
+git branch
 
 命令会列出所有分支，当前分支前面会标一个`*`号
 
-- 创建分支: git branch 分支名
-- 删除分支：git branch -d dev
-  - 如果你在a分支下已经新加入了很多文件，删除分支这个操作并不会这些文件
+创建分支
 
-- 切换分支: git checkout 分支名
+git branch 分支名
 
-- 创建并切换分支：git checkout -b 分支名
-- 合并分支：git merge 分支名
-  - 如果你现在是在a分支，git merge b ，就把b分支中的内容合并到a分支中。
-- 恢复分支:git branch 分支名 HEAD@{}
-  - 通过git reflog来看
-  - 找到 moving from ** to **
+切换分支
+
+git checkout 分支名
+
+创建并切换
+
+git checkout -b dev
+
+删除分支：git branch -d dev
+
+- 如果你在a分支下已经新加入了很多文件，删除分支这个操作并不会这些文件
+
+
+
+
+
+恢复分支:git branch 分支名 HEAD@{}
+
+- 通过git reflog来看
+- 找到 moving from ** to **
+
+合并分支
+
+git merge 分支
+
+解决冲突
+
+
+
+### 远程分支
+
+#### 查看所有远程分支
+
+命令：`git branch -r `
+
+
+
+#### 本地创建分支，推到远程 
+
+相当在远程也创建了一个分支
+
+格式： `git push <远程主机名> <本地分支名>:<远程分支名>`
+
+示例：`git push origin master:master`
+
+说明：
+
+- 远程主机名一般是origin
+- 当你从远程clone下代码之后，在本地会有一个master分支，在远程也会有一个master分支，此时，它们是一一对应的，如果你直接使用 `git push` 也就相当于是 `git push origin master:master`
+
+#### 删除远程分支
+
+格式： `git push <远程主机名> :<远程分支名>`
+
+示例：`git push origin :dev`
+
+说明：
+
+- 与创建本地分支并推到远程命令相比，只需要省略本地分支名。理解为把本地一个空分支推到远程，间接地实现了删除远程分支的功能。
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -261,7 +436,108 @@ git push -u origin master
 
 ## 补充
 
+
+
+### 先有本地代码库，再关联到远程github
+
+如果你先在本地建立了git库，想关联到远程github。你应该这样做：
+
+1. 去github上建立一个与本地代码库同名的代码库。
+2. 使用如下命令：
+
+`git remote add origin https://github.com/fanyoufu/04-git.git`
+
+`git push -u origin master`
+
+把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支`master`推送到远程。
+
+由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+
+
+
+
 [git游戏](https://learngitbranching.js.org)
+
+
+
+
+
+![1562549419249](git-material.assets/1562549419249.png)
+
+
+
+你也可以git commit -a -m "提交说明" 来代替上面两句代码了。
+
+
+
+
+
+背景：每次提交都修改了多个文件。每次提交都会有一个版本号。 
+
+目标：对某一个文件，希望回到某一个版本号，还原这个文件。
+
+方法一：要用到如下三条命令
+
+```
+git reset commitID yourfilename.txt
+git commit -m ""
+git checkout yourfilename.txt
+```
+
+
+
+方法二：
+
+```javascript
+git checkout commitID yourfilename
+```
+
+
+
+
+
+
+
+### 资源连接
+
+- [Git 官网](https://git-scm.com/)
+- [官方文档](<https://git-scm.com/docs>)
+- [GitHub Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf)
+- [Visual Git Cheat Sheet](http://ndpsoftware.com/git-cheatsheet.html)
+- [一个国人写的Git 教程](https://www.liaoxuefeng.com/wiki/896043488029600)
+- **[Pro Git](https://git-scm.com/book/zh/v2)**
+- [猴子都能懂得 GIT 入门](<https://backlog.com/git-tutorial/cn/>)
+- [git 简明指南](
+
+
+
+
+
+#### 关于commit内容的说明
+
+有一个清晰合理的commit格式是非常有必要的。下面是一个工具：
+
+```
+npm install -g commitizen
+```
+
+```javascript
+commitizen init cz-conventional-changelog --save-dev --save-exact
+```
+
+
+
+#### 删除文件
+
+你已经在硬盘上手动删除了文件。
+
+- 这个文件没有被跟踪过。
+- 文件在仓库中
+  - 从分支中还原：git checkout -- yourfilename.ext
+  - 你在分支中也删除: git rm yourfilename.ext git commit -m ""; 
+
+
 
 
 
