@@ -242,9 +242,10 @@ Git的工作原理是跟踪文件的修改，我们所做的一切操作：新�
 
 3. 从仓库恢复
 
-   你已经commit了本次修改，代码交到了仓库中。如果 此是通过版本管理，放弃某个版本的修改可以还原。
+   你已经commit了本次修改，代码也交到了仓库中。此时你有两种选择： 
 
-   或者是
+   - 回滚整体版本
+   - 恢复这一个文件
 
     ```
    git checkout commitID yourfilename
@@ -252,42 +253,41 @@ Git的工作原理是跟踪文件的修改，我们所做的一切操作：新�
 
    
 
-4. - - 
-
-
-
-
-
 ## github
 
 git和github的关系。git是一个版本管理工具，github提供了一个`网络版本`的代码库，它可以允许你在远程建立git库，这样你就不用担心本地电脑坏掉啦。
 
-当然 ，你得先在github上申请帐号。接下来，我们看看我们目前的处境：有一个可以建立远程库的github帐号，有一个本地使用的版本管理工具git。
+当然 ，你得先在github上申请帐号。接下来，我们看看我们目前的处境：有一个可以建立远程库的github帐号，有一个本地使用的版本管理工具git。下面我们就来介绍一下如何把它们关联起来。
 
-### 先有本地代码库，再关联到远程github
 
-如果你先在本地建立了git库，想关联到远程github。你应该这样做：
 
-1. 去github上建立一个与本地代码库同名的代码库。
-2. 使用如下命令：
+### 基本操作
 
-`git remote add origin https://github.com/fanyoufu/04-git.git`
+先创建远程仓库，再克隆到本地
 
-```javascript
-git push -u origin master
-```
+1. 登陆github，创建仓库
+2. 在电脑的某个文件夹下，通过git clone到本地。
+   - git clone命令会创建一个文件夹
+   - git clone命令只需要在第一次时使用
+3. 本地正常编辑（修改代码，新建文件等等），提交到本地仓库。
+   1. git add .
+   2. git commit
 
-把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支`master`推送到远程。
+4. 推送到远程github
 
-由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
-### 先创建远程github，再克隆到本地
+
+![1562552526725](git-material.assets/1562552526725.png)
+
+
+
+### 多人协作
 
 基本操作流程：
 
 1. 在github上建立仓库
 
-2. 在A电脑上：通过git clone到本地。
+2. 在A电脑上：使用https协议，通过git clone到本地。
 
    - clone命令会创建一个文件夹
    - clone命令只需要在第一次时使用
@@ -302,9 +302,8 @@ git push -u origin master
    git push
 
 5. 在B电脑上：git clone 到本地
+
 6. 拉取：git pull
-
-
 
 
 
@@ -317,28 +316,18 @@ git push -u origin master
 
 
 
-分支
+github的补充操作
 
-- 查看分支：git branch
-
-命令会列出所有分支，当前分支前面会标一个`*`号
-
-- 创建分支: git branch 分支名
-- 删除分支：git branch -d dev
-  - 如果你在a分支下已经新加入了很多文件，删除分支这个操作并不会这些文件
-
-- 切换分支: git checkout 分支名
-
-- 创建并切换分支：git checkout -b 分支名
-- 合并分支：git merge 分支名
-  - 如果你现在是在a分支，git merge b ，就把b分支中的内容合并到a分支中。
-- 恢复分支:git branch 分支名 HEAD@{}
-  - 通过git reflog来看
-  - 找到 moving from ** to **
+1. 删除仓库
+2. 直接进行代码编辑
 
 
 
-## 分支
+## 分支branch
+
+### 分支的原理 
+
+
 
 分支就是科幻电影里面的平行宇宙，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。
 
@@ -348,9 +337,13 @@ git push -u origin master
 
 但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1个文件还是1万个文件。
 
+### 分支相关命令
+
 查看分支
 
 git branch
+
+命令会列出所有分支，当前分支前面会标一个`*`号
 
 创建分支
 
@@ -364,15 +357,63 @@ git checkout 分支名
 
 git checkout -b dev
 
-删除分支
+删除分支：git branch -d dev
 
-git checkout -d 
+- 如果你在a分支下已经新加入了很多文件，删除分支这个操作并不会这些文件
+
+
+
+
+
+恢复分支:git branch 分支名 HEAD@{}
+
+- 通过git reflog来看
+- 找到 moving from ** to **
 
 合并分支
 
 git merge 分支
 
 解决冲突
+
+
+
+### 远程分支
+
+#### 查看所有远程分支
+
+命令：`git branch -r `
+
+
+
+#### 本地创建分支，推到远程 
+
+相当在远程也创建了一个分支
+
+格式： `git push <远程主机名> <本地分支名>:<远程分支名>`
+
+示例：`git push origin master:master`
+
+说明：
+
+- 远程主机名一般是origin
+- 当你从远程clone下代码之后，在本地会有一个master分支，在远程也会有一个master分支，此时，它们是一一对应的，如果你直接使用 `git push` 也就相当于是 `git push origin master:master`
+
+#### 删除远程分支
+
+格式： `git push <远程主机名> :<远程分支名>`
+
+示例：`git push origin :dev`
+
+说明：
+
+- 与创建本地分支并推到远程命令相比，只需要省略本地分支名。理解为把本地一个空分支推到远程，间接地实现了删除远程分支的功能。
+
+
+
+
+
+
 
 
 
@@ -383,6 +424,27 @@ git merge 分支
 
 
 ## 补充
+
+
+
+### 先有本地代码库，再关联到远程github
+
+如果你先在本地建立了git库，想关联到远程github。你应该这样做：
+
+1. 去github上建立一个与本地代码库同名的代码库。
+2. 使用如下命令：
+
+`git remote add origin https://github.com/fanyoufu/04-git.git`
+
+`git push -u origin master`
+
+把本地库的内容推送到远程，用`git push`命令，实际上是把当前分支`master`推送到远程。
+
+由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+
+
+
 
 [git游戏](https://learngitbranching.js.org)
 
@@ -423,6 +485,19 @@ git checkout commitID yourfilename
 
 
 
+
+
+
+### 资源连接
+
+- [Git 官网](https://git-scm.com/)
+- [官方文档](<https://git-scm.com/docs>)
+- [GitHub Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf)
+- [Visual Git Cheat Sheet](http://ndpsoftware.com/git-cheatsheet.html)
+- [一个国人写的Git 教程](https://www.liaoxuefeng.com/wiki/896043488029600)
+- **[Pro Git](https://git-scm.com/book/zh/v2)**
+- [猴子都能懂得 GIT 入门](<https://backlog.com/git-tutorial/cn/>)
+- [git 简明指南](
 
 
 
