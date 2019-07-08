@@ -393,7 +393,13 @@ github的补充操作
 
 ### 分支的工作原理
 
-图示
+图示。
+
+如下两个命令可以图形化查看git commit的过程
+
+- git log --graph
+
+- gitk
 
 ### 解决合并分支时的冲突
 
@@ -421,11 +427,7 @@ github的补充操作
 
    git commit -a -m ""
 
-补充,如下两个命令可以去：
 
-- git log --graph
-
-- gitk
 
 
 
@@ -651,7 +653,7 @@ git checkout commitID yourfilename
 
 
 
-#### 关于commit内容的说明
+### 关于commit内容的说明
 
 有一个清晰合理的commit格式是非常有必要的。下面是一个工具：
 
@@ -662,8 +664,6 @@ npm install -g commitizen
 ```javascript
 commitizen init cz-conventional-changelog --save-dev --save-exact
 ```
-
-
 
 
 
